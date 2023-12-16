@@ -1,0 +1,81 @@
+#include <iostream>
+#include <algorithm>
+const int n = 1000;
+
+//
+//Ввести последовательность натуральных чисел{ Aj }j = 1...n(n <= 1000).Упорядочить последовательность по неубыванию суммы цифр числа,
+//числа с одинаковыми суммами цифр дополнительно упорядочить по неубыванию первой цифры числа,
+//числа с одинаковыми суммами цифр и одинаковыми первыми цифрами дополнительно упорядочить по неубыванию самого числа.
+
+int main() {
+	int l, sum = 0, c[n], d[2][n], summ[n], cifra[n], ccifra[n];
+	std::cin >> l;
+	int a[n]{};
+	for (int i = 0; i < l; ++i) {
+		std::cout << "a[" << i << "]: ";
+		std::cin >> a[i];
+	}
+	std::copy(std::begin(a), std::end(a), std::begin(c));
+	for (int v = 0; v < l; ++v) {
+		while (c[v] > 0) {
+			sum += c[v] % 10;
+			c[v] /= 10;
+		}
+		summ[v] = sum;
+		sum = 0;
+	}
+	for (int i = 0; i < l; ++i) {
+		d[0][i] = a[i];
+		d[1][i] = summ[i];
+	}
+	int soxr = 0, su = 0;
+	for (int i = 0; i < l; ++i) {
+		soxr = d[0][i];
+		while (d[0][i] > 0) {
+			su = d[0][i] % 10;
+			d[0][i] /= 10;
+		}
+		d[0][i] = soxr;
+		cifra[i] = su;
+		soxr = 0;
+	}
+	for (int i = 0; i < l; ++i) {
+		for (int j = i; j < l; ++j) {
+			if (d[1][i] > d[1][j]) {
+				int tmp = d[1][i];
+				d[1][i] = d[1][j];
+				d[1][j] = tmp;
+				int tmpp = d[0][i];
+				d[0][i] = d[0][j];
+				d[0][j] = tmpp;
+			}
+		}
+	}
+	std::cout << "\n";
+	for (int i = 0; i < l - 1; ++i) {
+		if (cifra[i] > cifra[i + 1] && d[1][i] == d[1][i + 1]) {
+			int tmp = d[0][i];
+			d[0][i] = d[0][i + 1];
+			d[0][i + 1] = tmp;
+			int tmpp = cifra[i];
+			cifra[i] = cifra[i + 1];
+			cifra[i + 1] = tmpp;
+		}
+	}
+	for (int i = 0; i < l; i++) {
+		for (int j = 0; j < l - i - 1; j++) {
+			if (d[0][j] > d[0][j + 1] && d[1][i] == d[1][j]) {
+				int tmp = d[0][j];
+				d[0][j] = d[0][j + 1];
+				d[0][j + 1] = tmp;
+			}
+		}
+	}
+	for (int i = 0; i < 2; ++i) {
+		std::cout << "\n";
+		for (int j = 0; j < l; ++j) {
+			std::cout << d[i][j] << " ";
+		}
+	}
+
+}
