@@ -1,0 +1,63 @@
+#include <iostream>
+#include <iomanip>
+//задание 1
+int main() {
+	std::cout << "Task #1" << std::endl;
+	// логический тип
+	bool flag = true;
+	std::cout << "bool " << sizeof(flag) << " byte, true/false" << std::endl;
+	//целочисленнные типы
+	char c1;
+	std::cout << "char " << sizeof(c1) << " byte, " << CHAR_MIN << " " << CHAR_MAX << std::endl;
+	unsigned char c2;
+	std::cout << "unsigned char " << sizeof(c2) << " byte, " << "0 " << UCHAR_MAX << std::endl;
+	signed char c3;
+	std::cout << "signed char " << sizeof(c3) << " byte," << SCHAR_MIN << " " << SCHAR_MAX << std::endl;
+	short s1 = 34;
+	std::cout << "short " << sizeof(c1) << " byte, " <<std::numeric_limits<short>::lowest()<< " " << std::numeric_limits<short>::max() << std::endl;
+	unsigned short s2 ;
+	std::cout << "unsigned short " << sizeof(s2) << " byte, " << std::numeric_limits<unsigned short>::lowest() << " " << std::numeric_limits<unsigned short>::max() << std::endl;
+	int i1 = 1000;
+	std::cout << "int " << sizeof(i1) << " byte, " << std::numeric_limits<int>::lowest() << " " << std::numeric_limits<int>::max() << std::endl;
+	unsigned int i2;
+	std::cout << "usigned int " << sizeof(i2) << " byte, " << std::numeric_limits<unsigned int>::lowest() << " " << std::numeric_limits<unsigned int>::max() << std::endl;
+	long l1;
+	std::cout << "long " << sizeof(l1) << " byte, " << std::numeric_limits<long>::lowest() << " " << std::numeric_limits<long>::max() << std::endl;
+	unsigned long l2;
+	std::cout << "unsigned long " << sizeof(l2) << " byte, " << std::numeric_limits<unsigned long>::lowest() << " " << std::numeric_limits<unsigned long>::max() << std::endl;
+	long long l3;
+	std::cout << "long long " << sizeof(l3) << " byte, " << std::numeric_limits<long long>::lowest() << " " << std::numeric_limits<long long>::max() << std::endl;
+	unsigned long long l4;
+	std::cout << "unsigned long long " << sizeof(l4) << " byte, " << std::numeric_limits<unsigned long long>::lowest() << " " << std::numeric_limits<unsigned long long>::max() << std::endl;
+	//вещественный тип
+	float f1;
+	std::cout <<"float " << std::setprecision(39) << sizeof(f1) << " byte, " << std::numeric_limits<float>::lowest() << " " << std::numeric_limits<float>::max() << std::endl;
+	double d1 {2.656};
+	std::cout << "double " << std::setprecision(30) << sizeof(d1) << " byte, " << std::numeric_limits<double>::lowest() << " " << std::numeric_limits<double>::max() << std::endl;
+	long double d2;
+	std::cout << "long double " << std::setprecision(30) << sizeof(d2) << " byte, " << std::numeric_limits<long double>::lowest() << " " << std::numeric_limits<long double>::max() << std::endl;
+	//символьный тип
+	char r1 = 200;
+	std::cout << "char " << sizeof(r1) << " byte, " << CHAR_MIN << " " << CHAR_MAX << std::endl;
+	wchar_t w1;
+	std::cout << "wchar_t " << sizeof(w1) << " byte, " << std::numeric_limits<wchar_t>::lowest() << " " << std::numeric_limits<wchar_t>::max() << std::endl;
+	char16_t x  = 65545;
+	std::cout << "char16_t " << sizeof(x) << " byte, " << std::numeric_limits<char16_t>::lowest() << " " << std::numeric_limits<char16_t>::max() << std::endl;
+	char32_t x2;
+	std::cout << "char32_t " << sizeof(x2) << " byte, " << std::numeric_limits<char16_t>::lowest() << " " << std::numeric_limits<char32_t>::max() << std::endl;
+//задание 2
+	std::cout << "Task #2" << std::endl;
+	std::cout << "bool = " << flag << ", ";
+	std::cout << "short = " << s1<< ", ";
+	std::cout.precision(3);
+	std::cout <<std::fixed<< "double = " << d1 << ", ";
+	std::cout << "char = " << r1 << ". ";
+//задание 3
+	std::cout << "Task #3" << std::endl;
+	std::cout << "int = " << i1 << std::endl;//оноо выводит число, которое равно (число(2147483658) - 2147483647(максимум для этого типа данных) - 1) - 2147483648(минимум для этого типа данных) = -21474833638.
+	std::cout << "char16_t = " << x << std::endl; // оно выводит число, которое равно(число(65545) - 65535(максимум для этого типа данных) - 1) - 0(минимум для этого типа данных) = 9.
+	//но моя псевдо формула работает только с небольшим переполнением :(
+	//или как вы обьясняли: int = 1000, int = 4 байта, 1000/256 = 3, 1000 % 3 = 232. т. е. у нас есть четыре ячейки памяти:  0 0 3 232. 0 * 256**3 + 0 * 256**2 + 3 * 256**1 + 232 = 1000.
+
+
+}
