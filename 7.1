@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+
+//Дана последовательность натуральных чисел{ aj }j = 1...n(n <= 10000).
+//Если в последовательности нет чисел с суммой цифр, равной 19, упорядочить последовательность по невозрастанию.
+
+const short n = 10000;
+
+int main() {
+	int l, sum = 0, g = 0, c[n];
+	std::cin >> l;
+	int a[n]{};
+	for (int i = 0; i < l; ++i) {
+		std::cout << "a[" << i << "]: ";
+		std::cin >> a[i];
+	}
+
+	//std::copy(std::begin(a), std::end(a), std::begin(c));
+	int tmp = 0;
+	for (int i = 0; i < l; ++i) {
+		while (a[i] > 0) {
+			tmp = a[i];
+			sum = sum + (tmp % 10);
+			tmp /= 10;
+		}
+
+		if (sum % 19 == 0) {
+			g += 1;
+			sum = 0;
+		}
+		else { sum = 0; }
+	}
+
+
+	if (g == 0) {
+		for (int i = 0; i < l; ++i) {
+			for (int j = i + 1; j < l; ++j) {
+				if (a[i] < a[j]) {
+					int prox;
+					prox = a[i];
+					a[i] = a[j];      
+					a[j] = prox;
+				}
+
+			}
+		}
+	}
+	for (int i = 0; i < l; ++i) {
+		std::cout << a[i]<< " ";
+	}
+}
