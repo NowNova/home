@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+
+//Дана последовательность натуральных чисел{ Aj }j = 1...n(n <= 10000).
+//Удалить из последовательности числа, начинающиеся и заканчивающиеся одной
+//и той же цифрой, а среди оставшихся продублировать числа, начинающиеся цифрой 3.
+
+
+const int n = 1000;
+
+int main() {
+	int len, a[n];
+	std::cin >> len;
+	for (int i = 0; i < len; ++i) {
+		std::cout << "a[" << i << "]: ";
+		std::cin >> a[i];
+	}
+	int soxr = 0, percifra = 0, poslcifra = 0, chetcifr = 0, stepen;
+	for (int i = 0; i < len; ++i) {
+		soxr = a[i];
+		poslcifra = a[i] % 10;
+		while (a[i] > 0) {
+			percifra = a[i] % 10;
+			a[i] /= 10;
+		}
+		a[i] = soxr;
+		if (poslcifra == percifra) {
+			a[i] = 0;
+		}
+		else if (percifra == 3) {
+			while (a[i] > 0) {
+				a[i] /= 10;
+				chetcifr += 1;
+			}
+			a[i] = (soxr * pow(10, chetcifr)) + soxr;
+			chetcifr = 0;
+
+		}
+		else {
+			a[i] = soxr;
+		}
+	}
+	for (int i = 0; i < len; ++i) {
+		std::cout << a[i] << " ";
+	}
+}
